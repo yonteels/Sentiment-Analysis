@@ -1,0 +1,2 @@
+
+        writer = csv.writer(file)
