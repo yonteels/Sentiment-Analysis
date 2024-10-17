@@ -28,9 +28,8 @@ def parse_html(html):
     soup = BeautifulSoup(html, 'html.parser')
     return soup
 
-def scrape_example_site():
+def scraper():
     url = "https://myanimelist.net/topanime.php" 
-
     # Initialize WebDriver
     driver = init_driver()
 
@@ -41,5 +40,6 @@ def scrape_example_site():
         print(f"Page Title: {title}")
     finally:
         driver.quit()
+
 if __name__ == "__main__":
-    scrape_example_site()
+    scraper()
