@@ -12,11 +12,8 @@ conn = mysql.connector.connect(
 )
 
 cursor = conn.cursor()
-line =0;
 
 for _, row in df.iterrows():
-    print(line)
-    line += 1
     sql = """
     INSERT INTO allanime (Title, Rating, `Rank`, Popularity, Synopsis, Episodes, Status, Aired, Genres)
     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
