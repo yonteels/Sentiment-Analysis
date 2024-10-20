@@ -10,8 +10,11 @@ mydb = mysql.connector.connect(
 
 cursor =mydb.cursor()
 
-with open('review.csv', mode = 'r') as file:
+with open('animeData.csv', mode = 'r') as file:
     csvFile = csv.DictReader(file)
 
 
 
+
+
+mydb.close
