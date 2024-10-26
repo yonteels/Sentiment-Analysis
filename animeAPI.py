@@ -10,7 +10,7 @@ def get_all_anime_details_to_csv(file_name):
 
     with open(file_name, mode='w', newline='', encoding='utf-8') as file:
         writer = csv.writer(file)
-        writer.writerow(['Title', 'Picture', 'Score', 'Rank', 'Popularity', 'Synopsis', 'Episodes', 'Status', 'Aired', 'Genres'])
+        writer.writerow(['mal_id','Title', 'Picture', 'Score', 'Rank', 'Popularity', 'Synopsis', 'Episodes', 'Status', 'Aired', 'Genres'])
     
     while has_next_page:
         url = f"{base_url}/anime?page={current_page}"
@@ -25,6 +25,7 @@ def get_all_anime_details_to_csv(file_name):
                 writer = csv.writer(file)
 
                 for anime in anime_page:
+                    mal_id = anime.get('mal_id', 'N/A')
                     title = anime.get('title', 'N/A')
                     # Updated picture URL extraction
                     picture = anime.get('images', {}).get('jpg', {}).get('image_url', 'N/A')
@@ -35,10 +36,9 @@ def get_all_anime_details_to_csv(file_name):
                     episodes = anime.get('episodes', 'N/A')
                     status = anime.get('status', 'N/A')
                     aired = anime.get('aired', {}).get('string', 'N/A')
-
                     genres = anime.get('genres', [])
                     genre_names = ', '.join([genre.get('name', 'N/A') for genre in genres])
-                    writer.writerow([title, picture, score, rank, popularity, synopsis, episodes, status, aired, genre_names])
+                    writer.writerow([mal_id,title, picture, score, rank, popularity, synopsis, episodes, status, aired, genre_names])
 
             has_next_page = pagination.get('has_next_page', False)
             print(f"Picture URL={picture}")
