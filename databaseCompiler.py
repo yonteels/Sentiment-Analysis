@@ -15,12 +15,13 @@ cursor = conn.cursor()
 
 for _, row in df.iterrows():
     sql = """
-    INSERT INTO allanime (Title, Rating, `Rank`, Popularity, Synopsis, Episodes, Status, Aired, Genres)
-    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+    INSERT INTO allanime (Title, Picture, Score, `Rank`, Popularity, Synopsis, Episodes, Status, Aired, Genres)
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
     """
     cursor.execute(sql, (
         row['Title'], 
-        row['Rating'] if row['Rating'] != 'N/A' else None, 
+        row['Picture'],
+        float(row['Score']) if not pd.isnull(row['Score']) else None,
         int(row['Rank']) if not pd.isnull(row['Rank']) else None,
         int(row['Popularity']) if not pd.isnull(row['Popularity']) else None,
         row['Synopsis'], 
